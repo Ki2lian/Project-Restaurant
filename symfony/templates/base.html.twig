@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+		<title>Over eat - {% block title %}{% endblock %}</title>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+		{% block customCSS %}{% endblock %}
+	</head>
+	<body class="bg-light">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container">
+				<a class="navbar-brand" href="{{ path('home') }}">
+					<img src="{{ asset('build/images/logo.svg') }}" alt="Logo of over eat" width="60" height="50">
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="mainNavbar">
+					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        {% if app.user %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="far fa-2x fa-user-circle"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item {% if app.request.attributes.get('_route') == 'logout' %}active{% endif %}" href="{{ path('account') }}" href="{{ path('account') }}">My account</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ path('logout') }}">Log out</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        {% else %}
+                        <li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_route') == 'login' %}active{% endif %}" href="{{ path('login') }}">Log in</a>
+						</li>
+						{# <li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_route') == 'register' %}active{% endif %}" href="{{ path('register') }}">Register</a>
+						</li> #}
+                        {% endif %}
+					</ul>
+				</div>
+			</div>
+		</nav>
+        <div class="container mt-5">
+		    {% block body %}{% endblock %}
+        </div>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+		{% block customJS %}{% endblock %}
+	</body>
+</html>

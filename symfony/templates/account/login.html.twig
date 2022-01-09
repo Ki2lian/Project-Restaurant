@@ -1,0 +1,48 @@
+{# templates/login/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block title %}Log in{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-xxl-6 col-lg-8">
+            <div class="card">
+                <div class="card-header pt-4 pb-4 text-center bg-dark">
+                    <span><img src="{{ asset('build/images/logo.svg') }}" alt="Logo of over eat" height="50"></span>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center w-75 m-auto">
+                        <h4 class="text-dark-50 text-center mt-0 fw-bold">Log in</h4>
+                        <p class="text-muted mb-4">Enter your email address and password to access your account</p>
+                    </div>
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <div class="container mt-1 ms-1">
+                        <form action="{{ path('login') }}" method="post">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Email:</label>
+                                <input class="form-control" type="email" id="username" required="required" maxlength="255" name="_username" value="{{ last_username }}"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password:</label>
+                                <input class="form-control" type="password" id="password" required="required" name="_password"/>
+                            </div>
+
+                            {# If you want to control the URL the user is redirected to on success
+                            <input type="hidden" name="_target_path" value="/account"/> #}
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                            <div class="mb-3 text-center">
+                                <button class="btn btn-success" type="submit">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <p class="text-muted">You do not have an account ? <a href="{{ path('register') }}" class="text-muted ms-1"><b>Create an account</b></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

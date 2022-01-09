@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nothing to eat here...{% endblock %}
+{% block body %}
+    <div class="text-center">
+        <span class="error-num">4</span>
+        <div class="eye"></div>
+        <span class="error-num">3</span>
+
+        <p class="sub-text">Nothing to eat here...</p>
+        <a href="{{ path('home') }}" class="btn btn-lg btn-dark">Let's order</a>
+    </div>
+{% endblock %}
+
+{% block customJS %}
+    {{ encore_entry_script_tags('error') }}
+{% endblock %}

@@ -1,0 +1,56 @@
+<div class="card">
+	<div class="card-header pt-4 pb-4 text-center bg-dark">
+		<span><img src="{{ asset('build/images/logo.svg') }}" alt="Logo of over eat" height="50"></span>
+	</div>
+	<div class="card-body p-4">
+		<div class="text-center w-75 m-auto info">
+			<h4 class="text-dark-50 text-center mt-0 fw-bold">{{ options.title }}</h4>
+			<p class="text-muted mb-4">{{ options.subtitle }}</p>
+		</div>
+		{{ form_start(form) }}
+		{% if form_errors(form) %}
+			<div class="alert alert-danger" role="alert">
+				{{ form_errors(form) }}
+			</div>
+		{% endif %}
+		<div class="container mt-1 ms-1">
+			<div class="mb-3 d-flex justify-content-between">
+				<div>
+					{{ form_label(form.firstname, 'Firstname', { 'label_attr': {'class': 'form-label'} }) }}
+					{{ form_widget(form.firstname, {'attr': {'class': 'form-control','placeholder': 'Firstname', 'autocomplete': 'firstname'}}) }}
+				</div>
+				<div>
+					{{ form_label(form.lastname, 'Lastname', { 'label_attr': {'class': 'form-label'} }) }}
+					{{ form_widget(form.lastname, {'attr': {'class': 'form-control','placeholder': 'Lastname', 'autocomplete': 'lastname'}}) }}
+				</div>
+			</div>
+			{% if options.title == "Registration" %}
+				<div class="mb-3">
+					{{ form_label(form.email, 'Email', { 'label_attr': {'class': 'form-label'} }) }}
+					{{ form_widget(form.email, {'attr': {'class': 'form-control','placeholder': 'Email', 'autocomplete': 'email'}}) }}
+				</div>
+			{% endif %}
+			<div class="mb-3">
+				{{ form_label(form.plainPassword, 'Password', { 'label_attr': {'class': 'form-label'} }) }}
+				{{ form_widget(form.plainPassword, {'attr': {'class': 'form-control','placeholder': 'Password', 'minlength': 8, 'maxlength':4096, 'autocomplete': 'off'}}) }}
+				{% if options.title == "Modification" %}
+					<small class="text-muted">The password must be the same as for logging in</small>
+				{% endif %}
+			</div>
+            {% if form.restaurateur is defined %}
+			<div class="mb-3">
+				{{ form_row(form.restaurateur) }}
+			</div>
+            {% endif %}
+            {% if form.agreeTerms is defined %}
+			<div class="mb-3">
+				{{ form_row(form.agreeTerms) }}
+			</div>
+            {% endif %}
+			<div class="mb-3 text-center">
+				<button class="btn btn-success" type="submit">{{ options.button }}</button>
+			</div>
+		</div>
+		{{ form_end(form) }}
+	</div>
+</div>

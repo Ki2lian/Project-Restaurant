@@ -1,0 +1,70 @@
+.error-num {
+    font-size: 8rem;
+}
+
+.eye {
+    background: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    height: 100px;
+    position: relative;
+    width: 100px;
+}
+.eye::after {
+    background: #000;
+    border-radius: 50%;
+    bottom: 56.1px;
+    content: ' ';
+    height: 33px;
+    position: absolute;
+    right: 33px;
+    width: 33px;
+}
+
+.sub-text{
+    font-size: 36px;
+}
+
+#listOfRestaurants .card, #listOfProducts .card{
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.4s;
+    will-change: transform;
+}
+
+#listOfProducts .card{
+    height: 180px;
+}
+
+#listOfRestaurants .card:hover, #listOfProducts .card:hover{
+    -webkit-box-shadow: 0 9px 10px 0 rgb(0 0 0 / 20%);
+    -moz-box-shadow: 0 9px 10px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 10px 0 rgb(0 0 0 / 20%);
+    transform: translateY(-4px)!important;
+}
+
+#listOfRestaurants a{
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.add-product{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.qt-minus, .qt-plus{
+    -webkit-transition: background-color .2s linear;
+    -moz-transition: background-color .2s linear;
+    -ms-transition: background-color .2s linear;
+    -o-transition: background-color .2s linear;
+    transition: background-color .2s linear;
+}
+
+.qt-minus:hover, .qt-plus:hover{
+    background-color: #53b5aa;
+    color: #fff;
+}

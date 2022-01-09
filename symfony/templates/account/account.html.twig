@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center bg-dark text-white p-3">
+            <div>Profile</div>
+            <div>
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalEditPassword">Change password</button>
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#modalEditAccount"><i class="fas fa-user"></i> Change account information</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="text-start">
+                <p><span class="fw-bold">Email</span> <span class="ms-2">{{ app.user.email }}</span></p>
+                <p><span class="fw-bold">First name</span> <span class="ms-2" id="firstname">{{ app.user.firstname }}</span></p>
+                <p><span class="fw-bold">Last name</span> <span class="ms-2" id="lastname">{{ app.user.lastname }}</span></p>
+            </div>
+        </div>
+    </div>
+    {% include "account/edit_account_modal.html.twig" with {
+        'form': editAccountForm, 
+        'options': { 
+            'title': 'Modification',
+            'subtitle':  'Edit your information',
+            'button': 'Save changes'
+            }
+    } %}
+    {% include "account/edit_password_modal.html.twig" %}
+{% endblock %}
+
+{% block customJS %}
+    <script>
+        const editAccountRoute = "{{ path('edit_account') }}";
+        const editPasswordRoute = "{{ path('edit_password') }}";
+    </script>
+    {{ encore_entry_script_tags('edit_account') }}
+    {{ encore_entry_script_tags('edit_password') }}
+{% endblock %}
