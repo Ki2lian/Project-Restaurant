@@ -1,20 +1,17 @@
-docker-symfony
+Restaurant Application - Over Eat
 ==============
 
-[![Build Status](https://secure.travis-ci.org/eko/docker-symfony.png?branch=master)](http://travis-ci.org/eko/docker-symfony)
-
-
-This is a complete stack for running Symfony 5 (latest version), PHP8 and ELK stack using docker-compose tool.
+Over Eat is an order reservation application with restaurant management
 
 # Installation
 
 First, clone this repository:
 
 ```bash
-$ git clone https://github.com/eko/docker-symfony.git
+$ git clone git@github.com:Ki2lian/Project-Restaurant.git
 ```
 
-Next, put your Symfony application into `symfony` folder and do not forget to add `symfony.localhost` in your `/etc/hosts` file.
+Do not forget to add `symfony.localhost` in your `/etc/hosts` file.
 
 Make sure you adjust `database_host` in `parameters.yml` to the database container alias "db" (for Symfony < 4)
 Make sure you adjust `DATABASE_URL` in `env` to the database container alias "db" (for Symfony >= 4)
@@ -32,6 +29,22 @@ _Note :_ you can rebuild all Docker images by running:
 ```bash
 $ docker-compose build
 ```
+
+After running the docker command, go to the CLI of php-fpm and run the following commands:
+```bash
+$ composer update
+$ npm install
+$ php bin/console d:m:m
+$ php bin/console doctrine:database:create
+$ php bin/console doctrine:fixtures:load
+```
+* composer update : download the dependencies for Symfony.
+* npm install : download the dependencies of JS webpack / JS libraries, etc..
+* php bin/console doctrine:database:create : create database if doesn't exist
+* php bin/console d:m:m : load entities
+* php bin/console doctrine:fixtures:load : create fake data
+
+If you have any problems, please contact me on Discord (𝗞𝗶𝗹𝗹𝗶𝗮𝗻#0526) or make an issue.
 
 # How it works?
 
