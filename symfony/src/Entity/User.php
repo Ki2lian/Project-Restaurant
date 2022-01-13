@@ -20,6 +20,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
         $this->commands = new ArrayCollection();
         $this->restaurants = new ArrayCollection();
     }
@@ -77,6 +78,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\ManyToMany(targetEntity=Restaurant::class, mappedBy="responsable")
      */
     private $restaurants;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -268,6 +274,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->restaurants->removeElement($restaurant)) {
             $restaurant->removeResponsable($this);
         }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

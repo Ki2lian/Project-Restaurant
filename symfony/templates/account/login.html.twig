@@ -21,11 +21,11 @@
                         <form action="{{ path('login') }}" method="post">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Email:</label>
-                                <input class="form-control" type="email" id="username" required="required" maxlength="255" name="_username" value="{{ last_username }}"/>
+                                <input class="form-control" type="email" id="username" required="required" maxlength="255" name="_username" value="{{ last_username }}" autocomplete="email"/>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password:</label>
-                                <input class="form-control" type="password" id="password" required="required" name="_password"/>
+                                <input class="form-control" type="password" id="password" required="required" name="_password" autocomplete="off"/>
                             </div>
 
                             {# If you want to control the URL the user is redirected to on success
@@ -40,7 +40,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-12 text-center">
-                    <p class="text-muted">You do not have an account ? <a href="{{ path('register') }}" class="text-muted ms-1"><b>Create an account</b></a></p>
+                    <p class="text-muted">You do not have an account ? <a href="{{ path('register') }}" class="ms-1 link"><b>Create an account</b></a></p>
                 </div>
             </div>
         </div>

@@ -1,0 +1,35 @@
+<div class="card">
+	<div class="card-header pt-4 pb-4 text-center bg-dark">
+		<span><img src="{{ asset('build/images/logo.svg') }}" alt="Logo of over eat" height="50"></span>
+	</div>
+	<div class="card-body p-4">
+		<div class="text-center w-75 m-auto info">
+			<h4 class="text-dark-50 text-center mt-0 fw-bold">Add product</h4>
+			<p class="text-muted mb-4">Add products for your restaurant</p>
+		</div>
+		{{ form_start(form) }}
+		{% if form_errors(form) %}
+			<div class="alert alert-danger" role="alert">
+				{{ form_errors(form) }}
+			</div>
+		{% endif %}
+		<div class="container mt-1 ms-1">
+			<div class="mb-3">
+                {{ form_label(form.name, 'Name', { 'label_attr': {'class': 'form-label'} }) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control','placeholder': 'Name', 'autocomplete': 'name'}}) }}
+			</div>
+			<div class="mb-3">
+                {{ form_label(form.price, 'Price', { 'label_attr': {'class': 'form-label'} }) }}
+                {{ form_widget(form.price, {'attr': {'class': 'form-control','placeholder': 'Price', 'autocomplete': 'price'}}) }}
+			</div>
+			<div class="mb-3">
+                {{ form_label(form.description, 'Description', { 'label_attr': {'class': 'form-label'} }) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control','placeholder': 'Description', 'autocomplete': 'description'}}) }}
+			</div>
+			<div class="mb-3 text-center">
+				<button class="btn btn-success" type="submit">Add</button>
+			</div>
+		</div>
+		{{ form_end(form) }}
+	</div>
+</div>

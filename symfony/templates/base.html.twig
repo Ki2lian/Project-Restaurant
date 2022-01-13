@@ -19,10 +19,18 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="mainNavbar">
-					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
                         {% if app.user %}
+							{% if app.user.roles[0] == 'ROLE_ADMIN' %}
+								<li class="nav-item">
+									<a class="nav-link {% if app.request.attributes.get('_route') == 'restaurants' %}active{% endif %}" href="{{ path('restaurants') }}">View my restaurants</a>
+								</li>
+							{% endif %}
+						<li class="nav-item">
+							<a class="nav-link {% if app.request.attributes.get('_route') == 'orders' %}active{% endif %}" href="{{ path('orders') }}">View my orders</a>
+						</li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle {% if app.request.attributes.get('_route') == 'account' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="far fa-2x fa-user-circle"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -39,9 +47,6 @@
                         <li class="nav-item">
 							<a class="nav-link {% if app.request.attributes.get('_route') == 'login' %}active{% endif %}" href="{{ path('login') }}">Log in</a>
 						</li>
-						{# <li class="nav-item">
-							<a class="nav-link {% if app.request.attributes.get('_route') == 'register' %}active{% endif %}" href="{{ path('register') }}">Register</a>
-						</li> #}
                         {% endif %}
 					</ul>
 				</div>

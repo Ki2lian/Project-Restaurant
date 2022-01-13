@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All my restaurants{% endblock %}
+
+{% block body %}
+    {% include 'restaurant/card.html.twig' with {restaurants, addRestaurantForm, options: {page: 'restaurants'}} %}
+{% endblock %}

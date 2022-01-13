@@ -1,0 +1,25 @@
+<div class="modal fade" id="modalProduct" tabindex="-1" aria-labelledby="labelModalProduct" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="labelModalProduct">Add product</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				{% include "product/product_form.html.twig" with { form: addProductForm } %}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+    const addProductURL = '{{ path('add_product') }}';
+    const editProductURL = '{{ path('edit_product') }}';
+    const deleteProductURL = '{{ path('delete_product') }}';
+    const homeURL = '{{ path('home') }}';
+</script>
+
+{{ encore_entry_script_tags('product') }}

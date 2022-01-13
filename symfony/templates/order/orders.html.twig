@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All my orders{% endblock %}
+
+{% block body %}
+    {% include 'order/card.html.twig' with {orders, options: {page: 'orders'}} %}
+{% endblock %}

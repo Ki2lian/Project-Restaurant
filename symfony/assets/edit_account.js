@@ -8,7 +8,7 @@ $(document).ready(function(){
         submitButton.html('<i class="fas fa-spinner fa-pulse"></i>');
         var data = $(this).serialize();
         $.ajax({
-            type: "POST",
+            type: "PUT",
             url: editAccountRoute,
             data,
             dataType: "json",

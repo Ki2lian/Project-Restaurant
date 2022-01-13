@@ -39,6 +39,8 @@ Encore
     .addEntry('edit_password', './assets/edit_password.js')
     .addEntry('animation_appear', './assets/animation_appear.js')
     .addEntry('cart', './assets/cart.js')
+    .addEntry('restaurant', './assets/restaurant.js')
+    .addEntry('product', './assets/product.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

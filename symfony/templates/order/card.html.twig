@@ -1,0 +1,44 @@
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center bg-dark text-white p-3">
+    {% if options.page == "account" %}
+        <div>Your last 5 orders</div>
+        <a href="{{ path('orders') }}" class="btn btn-light">View all my orders</a>
+    {% else %}
+        <div>All my orders</div>
+    {% endif %}
+    </div>
+    <div class="card-body">
+    {% if orders %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <th>Order number</th>
+                    <th>Products</th>
+                    <th>Restaurant</th>
+                    <th>Total price</th>
+                    <th>Date</th>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.numero }}</td>
+                        <td style="max-width: 330px;">
+                            {% for orderLine in order.commandLine %}
+                                {{ orderLine.product.name }} (x{{ orderLine.quantity }}){% if not loop.last %}{{ ', ' }}{% endif %}
+                            {% endfor %}
+                        </td>
+                        <td><a class="fw-bold link" href="{{ path('restaurant', {id: order.restaurant.id}) }}">{{ order.restaurant.name }}</a></td>
+                        <td>&dollar;{{ order.totalPrice }}</td>
+                        <td>{{ order.createdAt | date("m/d/Y, H:i:s") }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center" role="alert">
+            <span>You have never ordered before, <a class="fw-bold link" href="{{ path('home') }}">choose a restaurant</a></span>
+        </div>
+    {% endif %}
+    </div>
+</div>

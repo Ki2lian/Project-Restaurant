@@ -22,6 +22,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('firstname', TextType::class, [
                 'error_bubbling' => true,
+                'empty_data' => '', // because If we send it no data, it returns null
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a firstname',
@@ -35,6 +36,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('lastname', TextType::class, [
                 'error_bubbling' => true,
+                'empty_data' => '', // because If we send it no data, it returns null
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a lastname',
@@ -48,6 +50,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'error_bubbling' => true,
+                'empty_data' => '', // because If we send it no data, it returns null
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter an email',
@@ -72,6 +75,7 @@ class RegistrationFormType extends AbstractType
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'error_bubbling' => true,
+                'empty_data' => '', // because If we send it no data, it returns null
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([

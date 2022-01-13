@@ -39,3 +39,7 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/account, roles: ROLE_USER }
+        - { path: ^/commands, roles: ROLE_USER }
+        - { path: ^/restaurant, roles: ROLE_USER }
+        - { path: ^/restaurants, roles: ROLE_ADMIN }
+        - { path: ^/product, roles: ROLE_ADMIN }

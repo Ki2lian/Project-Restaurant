@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Restaurant;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,28 @@ class RestaurantRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Restaurant::class);
+    }
+
+    public function findByUser(User $user, $skip = null, $fetch = null)
+    {
+        if(isset($skip, $fetch) && intval($skip) >= 0 && intval($fetch) > 0){
+            return $this->createQueryBuilder('r')
+                ->join('r.responsable', 'u')
+                ->where('u.id = :userId')->setParameter('userId', $user->getId())
+                ->orderBy('r.id', 'DESC')
+                ->setMaxResults($fetch)
+                ->setFirstResult($skip)
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+        return $this->createQueryBuilder('r')
+            ->join('r.responsable', 'u')
+            ->where('u.id = :userId')->setParameter('userId', $user->getId())
+            ->orderBy('r.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     // /**

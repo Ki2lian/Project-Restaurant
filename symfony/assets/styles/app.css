@@ -68,3 +68,12 @@
     background-color: #53b5aa;
     color: #fff;
 }
+
+.remove-product{
+    cursor: pointer;
+}
+
+.link{
+    color: #009C9F!important;
+    text-decoration: none!important;
+}

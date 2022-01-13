@@ -3,7 +3,7 @@
 {% block title %}Account{% endblock %}
 
 {% block body %}
-    <div class="card">
+    <div class="card mb-5">
         <div class="card-header d-flex justify-content-between align-items-center bg-dark text-white p-3">
             <div>Profile</div>
             <div>
@@ -16,9 +16,17 @@
                 <p><span class="fw-bold">Email</span> <span class="ms-2">{{ app.user.email }}</span></p>
                 <p><span class="fw-bold">First name</span> <span class="ms-2" id="firstname">{{ app.user.firstname }}</span></p>
                 <p><span class="fw-bold">Last name</span> <span class="ms-2" id="lastname">{{ app.user.lastname }}</span></p>
+                <p><span class="fw-bold">Created date</span> <span class="ms-2" id="lastname">{{ app.user.createdAt | date("m/d/Y, H:i:s") }}</span></p>
+                <p><span class="fw-bold">Modification date</span> <span class="ms-2" id="lastname">{{ app.user.updatedAt | date("m/d/Y, H:i:s") }}</span></p>
             </div>
         </div>
     </div>
+    {% if app.user.roles[0] == 'ROLE_ADMIN' %}
+        {% include 'restaurant/card.html.twig' with {restaurants, options: {page: 'account'}} %}
+    {% endif %}
+
+    {% include 'order/card.html.twig' with {orders, options: {page: 'account'}} %}
+
     {% include "account/edit_account_modal.html.twig" with {
         'form': editAccountForm, 
         'options': { 

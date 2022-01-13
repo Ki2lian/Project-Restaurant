@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Restaurant;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -12,6 +13,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\RegistrationFormType;
 use App\Form\EditAccountFormType;
+use App\Form\RestaurantType;
+use App\Repository\CommandRepository;
+use App\Repository\RestaurantRepository;
+use ProxyManager\ProxyGenerator\AccessInterceptor\MethodGenerator\SetMethodPrefixInterceptor;
 
 class AccountController extends AbstractController
 {
@@ -67,28 +72,43 @@ class AccountController extends AbstractController
     }
 
     #[Route('/account', name: 'account', methods: ['GET'])]
-    public function account(): Response
+    public function account(CommandRepository $cr, RestaurantRepository $rr): Response
     {
         $user = $this->getUser();
+        $orders = $cr->findBy(array('user' => $user), array('id' => 'DESC'), 5, 0);
+        $addRestaurantForm = "";
+        $restaurants = [];
+        if($user->getRoles()[0] == "ROLE_ADMIN"){
+            $restaurants = $rr->findByUser($user, 0, 5);
+            $restaurant = new Restaurant();
+            $addRestaurantForm = $this->createForm(RestaurantType::class, $restaurant);
+            $addRestaurantForm = $addRestaurantForm->createView();
+        }
+
+        
         $form = $this->createForm(EditAccountFormType::class, $user);
         return $this->render('account/account.html.twig', [
             'editAccountForm' => $form->createView(),
+            'orders' => $orders,
+            'restaurants' => $restaurants,
+            'addRestaurantForm' => $addRestaurantForm
         ]);
     }
 
-    #[Route('/account/edit', name: 'edit_account', methods: ['POST'])]
+    #[Route('/account/edit', name: 'edit_account', methods: ['PUT'])]
     public function editAccount(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $isAjax = $request->isXMLHttpRequest();
         if (!$isAjax) return new Response('', 404);
 
         $user = $this->getUser();
-        $form = $this->createForm(EditAccountFormType::class, $user);
+        $form = $this->createForm(EditAccountFormType::class, $user, array('method' => 'PUT'));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $match = $userPasswordHasher->isPasswordValid($user, $form->get('plainPassword')->getData());
             if($match){
+                $user->setUpdatedAt(new \DateTime());
                 $entityManager->flush();
                 return $this->json(array(
                     "code" => 200,
@@ -116,7 +136,7 @@ class AccountController extends AbstractController
         ),200);
     }
 
-    #[Route('/account/edit_password', name: 'edit_password', methods: ['POST'])]
+    #[Route('/account/edit_password', name: 'edit_password', methods: ['PUT'])]
     public function editPassword(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $isAjax = $request->isXMLHttpRequest();
