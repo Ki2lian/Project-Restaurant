@@ -37,12 +37,14 @@ $ npm install
 $ php bin/console d:m:m
 $ php bin/console doctrine:database:create
 $ php bin/console doctrine:fixtures:load
+$ npm run build
 ```
 * composer update : download the dependencies for Symfony.
 * npm install : download the dependencies of JS webpack / JS libraries, etc..
 * php bin/console doctrine:database:create : create database if doesn't exist
 * php bin/console d\:m:m : load entities
 * php bin/console doctrine:fixtures:load : create fake data
+* npm run build : build application
 
 If you have any problems, please contact me on Discord (𝗞𝗶𝗹𝗹𝗶𝗮𝗻#0526) or make an issue.
 
