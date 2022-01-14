@@ -21,6 +21,7 @@
 			<div class="mb-3">
                 {{ form_label(form.price, 'Price', { 'label_attr': {'class': 'form-label'} }) }}
                 {{ form_widget(form.price, {'attr': {'class': 'form-control','placeholder': 'Price', 'autocomplete': 'price'}}) }}
+				<span class="small text-muted">The price must be a positive number with a maximum of 2 digits after the decimal point</span>
 			</div>
 			<div class="mb-3">
                 {{ form_label(form.description, 'Description', { 'label_attr': {'class': 'form-label'} }) }}

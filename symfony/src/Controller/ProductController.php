@@ -40,6 +40,8 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $product->setName(str_replace(array("'", '"'), "", $product->getName()));
+            $product->setDescription(str_replace(array("'", '"'), "", $product->getDescription()));
             $product->setRestaurant($restaurant);
             $entityManager->persist($product);
             $entityManager->flush();
@@ -88,6 +90,8 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $product->setName(str_replace(array("'", '"'), "", $product->getName()));
+            $product->setDescription(str_replace(array("'", '"'), "", $product->getDescription()));
             $product->setUpdatedAt(new \DateTime());
             $entityManager->flush();
             return $this->json(array(

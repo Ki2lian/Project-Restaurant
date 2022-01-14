@@ -113,6 +113,9 @@ class RestaurantController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $restaurant->setName(str_replace(array("'", '"'), "", $restaurant->getName()));
+            $restaurant->setAddress(str_replace(array("'", '"'), "", $restaurant->getAddress()));
+            $restaurant->setPhone(str_replace(array("'", '"'), "", $restaurant->getPhone()));
             $restaurant->addResponsable($this->getUser());
             $entityManager->persist($restaurant);
             $entityManager->flush();
@@ -150,6 +153,9 @@ class RestaurantController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $restaurant->setName(str_replace(array("'", '"'), "", $restaurant->getName()));
+            $restaurant->setAddress(str_replace(array("'", '"'), "", $restaurant->getAddress()));
+            $restaurant->setPhone(str_replace(array("'", '"'), "", $restaurant->getPhone()));
             $restaurant->setUpdatedAt(new \DateTime());
             $entityManager->flush();
             return $this->json(array(
