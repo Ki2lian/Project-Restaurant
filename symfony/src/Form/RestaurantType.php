@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RestaurantType extends AbstractType
 {
@@ -20,6 +21,11 @@ class RestaurantType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a name',
+                    ]),
+                    new Regex([
+                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9]+$/',
+                        "match" => true,
+                        "message" => "Special characters are not allowed in the name"
                     ])
                 ],
             ])
@@ -29,6 +35,11 @@ class RestaurantType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter an address',
+                    ]),
+                    new Regex([
+                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9]+$/',
+                        "match" => true,
+                        "message" => "Special characters are not allowed in the address"
                     ])
                 ],
             ])
@@ -38,6 +49,11 @@ class RestaurantType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a phone number',
+                    ]),
+                    new Regex([
+                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9()[\]]+$/',
+                        "match" => true,
+                        "message" => "Special characters are not allowed in the phone number expect () and []"
                     ])
                 ],
             ])

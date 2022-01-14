@@ -22,6 +22,11 @@ class ProductType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a name',
+                    ]),
+                    new Regex([
+                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9]+$/',
+                        "match" => true,
+                        "message" => "Special characters are not allowed in the name"
                     ])
                 ],
             ])
@@ -41,7 +46,16 @@ class ProductType extends AbstractType
                 ],
             ])
             ->add('description', TextType::class, [
+                'error_bubbling' => true,
+                'required' => false,
                 'empty_data' => '', // because If we send it no data, it returns null
+                'constraints' => [
+                    new Regex([
+                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9]+$/',
+                        "match" => true,
+                        "message" => "Special characters are not allowed in the description"
+                    ])
+                ]
             ])
         ;
     }
