@@ -8,7 +8,7 @@ Over Eat is an order reservation application with restaurant management
 First, clone this repository:
 
 ```bash
-$ git clone git@github.com:Ki2lian/Project-Restaurant.git
+$ git clone https://github.com/eko/docker-symfony.git
 ```
 
 Do not forget to add `symfony.localhost` in your `/etc/hosts` file.
@@ -30,7 +30,13 @@ _Note :_ you can rebuild all Docker images by running:
 $ docker-compose build
 ```
 
-After running the docker command, go to the CLI of php-fpm and run the following commands:
+After running the docker command, clone this repo in another folder and recover symfony folder and place it in docker-symfony)
+```bash
+$ git clone git@github.com:Ki2lian/Project-Restaurant.git
+```
+
+Then go to the CLI of php-fpm (docker exec -it php-fpm sh) and run the following commands:
+
 ```bash
 $ composer update
 $ npm install
