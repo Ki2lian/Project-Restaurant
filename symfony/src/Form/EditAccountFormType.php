@@ -27,7 +27,7 @@ class EditAccountFormType extends AbstractType
                         'message' => 'Please enter a firstname',
                     ]),
                     new Regex([
-                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ]+$/',
+                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ ]+$/',
                         "match" => true,
                         "message" => "Special characters and numbers are not allowed in the firstname"
                     ])
@@ -40,7 +40,7 @@ class EditAccountFormType extends AbstractType
                         'message' => 'Please enter a lastname',
                     ]),
                     new Regex([
-                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ]+$/',
+                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ ]+$/',
                         "match" => true,
                         "message" => "Special characters and numbers are not allowed in the lastname"
                     ])

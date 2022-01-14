@@ -23,7 +23,7 @@ class RestaurantType extends AbstractType
                         'message' => 'Please enter a name',
                     ]),
                     new Regex([
-                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9]+$/',
+                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9 ]+$/',
                         "match" => true,
                         "message" => "Special characters are not allowed in the name"
                     ])
@@ -37,7 +37,7 @@ class RestaurantType extends AbstractType
                         'message' => 'Please enter an address',
                     ]),
                     new Regex([
-                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9]+$/',
+                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9 ]+$/',
                         "match" => true,
                         "message" => "Special characters are not allowed in the address"
                     ])
@@ -51,7 +51,7 @@ class RestaurantType extends AbstractType
                         'message' => 'Please enter a phone number',
                     ]),
                     new Regex([
-                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9()[\]]+$/',
+                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9()[\] ]+$/',
                         "match" => true,
                         "message" => "Special characters are not allowed in the phone number expect () and []"
                     ])

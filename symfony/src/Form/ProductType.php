@@ -24,7 +24,7 @@ class ProductType extends AbstractType
                         'message' => 'Please enter a name',
                     ]),
                     new Regex([
-                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9]+$/',
+                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9 ]+$/',
                         "match" => true,
                         "message" => "Special characters are not allowed in the name"
                     ])
@@ -51,7 +51,7 @@ class ProductType extends AbstractType
                 'empty_data' => '', // because If we send it no data, it returns null
                 'constraints' => [
                     new Regex([
-                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9]+$/',
+                        "pattern" => '/^[A-zÀ-ÖØ-öø-ÿ0-9 ]+$/',
                         "match" => true,
                         "message" => "Special characters are not allowed in the description"
                     ])
